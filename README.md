@@ -1,5 +1,5 @@
 # crypto-exchange
-
+This is the final project of my internship. It is an app created using Vue.js and the ccxt library (https://github.com/ccxt/ccxt). The user chooses one crypto exchange and one crypto asset pair and sees a list of the latest trades. 
 > A Vue.js project
 
 ## Build Setup
