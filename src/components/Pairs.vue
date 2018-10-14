@@ -9,7 +9,7 @@
 </template>
 
 <script>
-async function getMarkets() {
+async function getMarkets () {
   let acx = new ccxt.acx()
   let markets = await acx.load_markets()
   return markets

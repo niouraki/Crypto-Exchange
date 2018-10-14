@@ -1,5 +1,7 @@
 <template>
-  <h1>Trades Component</h1>
+  <div>
+    <h1>Trades Component</h1>
+  </div>
 </template>
 
 <script>
@@ -9,6 +11,19 @@ export default {
     return {
     }
   }
+  //computed: {
+    //loadTrades() {
+      //const exchange = new ccxt.acx()
+      //const limit = 20
+      //const since = exchange.milliseconds()
+      //let trades = exchange.fetchTrades(this.pair, since, limit)
+      //exchange.fetchTrades(this.pair, since, limit).then(trades => this.trades = sign)
+      //return sign
+    //}
+//  },
+//  mounted() {
+    //this.loadTrades
+  //}
 }
 </script>
 
