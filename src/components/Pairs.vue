@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Pairs Component</h1>
-    <select v-model="selected">
+    <select v-model="selected" v-on:change="getPair(selected)">
       <option disabled value="">Please select a pair</option>
       <option v-for="pair in pairs" :key="pair.id">{{ pair.symbol }}</option>
     </select>
@@ -24,6 +24,13 @@ export default {
     return {
       selected: '',
       pairs
+    }
+  },
+  ////when the select input value is changed by the user, this method will get the new value and store it
+  methods: {
+    getPair(pair) {
+      this.selected = pair
+      console.log(this.selected)
     }
   },
   mounted () {

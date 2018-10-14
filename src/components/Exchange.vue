@@ -17,6 +17,7 @@ export default {
       exchanges: [...ccxt.exchanges],
     }
   },
+  //when the select input value is changed by the user, this method will get the new value and store it
   methods: {
     getExchange(exchange) {
       this.selected = exchange
