@@ -5,25 +5,13 @@
 </template>
 
 <script>
+
 export default {
   name: 'Trades',
   data () {
     return {
     }
   }
-  //computed: {
-    //loadTrades() {
-      //const exchange = new ccxt.acx()
-      //const limit = 20
-      //const since = exchange.milliseconds()
-      //let trades = exchange.fetchTrades(this.pair, since, limit)
-      //exchange.fetchTrades(this.pair, since, limit).then(trades => this.trades = sign)
-      //return sign
-    //}
-//  },
-//  mounted() {
-    //this.loadTrades
-  //}
 }
 </script>
 

@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Exchange Component</h1>
-    <select v-model="selected" v-on:change="getExchange(selected)">
+    <select v-model="ExchangeStore" v-on:change="getExchange(ExchangeStore)">
       <option disabled value="">Please select an exchange</option>
       <option v-for="exchange in exchanges" :key="exchange.id">{{ exchange }}</option>
     </select>
@@ -9,19 +9,21 @@
 </template>
 
 <script>
+import ExchangeStore from "../stores/ExchangeStore"
+const ccxt = require('ccxt')
+
 export default {
   name: 'Exchange',
   data () {
     return {
-      selected: '',
-      exchanges: [...ccxt.exchanges],
+      ExchangeStore: ExchangeStore.data.myExchange,
+      exchanges: [...ccxt.exchanges]
     }
   },
-  //when the select input value is changed by the user, this method will get the new value and store it
+  // when the select input value is changed by the user, this method will get the new value and store it
   methods: {
-    getExchange(exchange) {
-      this.selected = exchange
-      console.log(this.selected)
+    getExchange (exchange) {
+      ExchangeStore.methods.getExchange(exchange)
     }
   }
 }
