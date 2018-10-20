@@ -25,9 +25,12 @@ export default {
     }
   },
   // when the select input value is changed by the user, this method will get the new value and store it
-  getPair (e) {
-    let pair = e.target.value
-    this.$store.commit('getPair', pair)
+  methods: {
+    ...mapActions(['getMarkets', 'getExchange']),
+    getPair (e) {
+      let pair = e.target.value
+      this.$store.commit('getPair', pair)
+    }
   }
 }
 </script>

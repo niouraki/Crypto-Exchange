@@ -28,9 +28,8 @@ export const store = new Vuex.Store({
   },
   actions: {
     async getMarkets (commit, state) {
-      const ccxt = require('ccxt')
       const proxy = 'https://cors-anywhere.herokuapp.com/'
-      let exchange = new ccxt[state.exchange] ({ 'proxy': proxy })
+      let exchange = new ccxt[state.exchange]({ 'proxy': proxy })
       let pairs = await exchange.loadMarkets()
       commit('getMarkets', pairs)
     }

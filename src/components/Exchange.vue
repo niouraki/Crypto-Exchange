@@ -11,8 +11,6 @@
 <script>
 import { mapActions } from 'vuex'
 
-const ccxt = require('ccxt')
-
 export default {
   name: 'Exchange',
   data () {
