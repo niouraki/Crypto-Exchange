@@ -9,11 +9,13 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapMutations } from 'vuex'
 
 export default {
   name: 'Exchange',
-  data () {
+  data() {
+    return {
+    }
   },
   computed: {
     exchanges () {
@@ -25,10 +27,10 @@ export default {
   },
   // when the select input value is changed by the user, this method will get the new value and store it
   methods: {
-    ...mapActions(['getMarkets', 'getExchange']),
+    ...mapActions(['getMarkets', 'receiveExchange']),
     getExchange (e) {
       let exchange = e.target.value
-      this.$store.commit('getExchange', exchange)
+      this.receiveExchange(exchange)
       this.getMarkets()
     }
   }

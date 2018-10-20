@@ -2,7 +2,7 @@
   <div>
     <h1>Pairs Component</h1>
     <select :value="pair" v-on:change="getPair">
-      <option v-for="pair in pairs" v-bind:value="pair" :key="pair.id"> {{ pair }}</option>
+      <option v-for="pair in pairs" v-bind:value="pair" :key="pair.id"> {{ pair.symbol }}</option>
     </select>
   </div>
 </template>
@@ -26,7 +26,7 @@ export default {
   },
   // when the select input value is changed by the user, this method will get the new value and store it
   methods: {
-    ...mapActions(['getMarkets', 'getExchange']),
+    ...mapActions(['getMarkets']),
     getPair (e) {
       let pair = e.target.value
       this.$store.commit('getPair', pair)

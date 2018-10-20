@@ -4,8 +4,7 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 const ccxt = require('ccxt')
 // here I define the data of my app
-export const store = new Vuex.Store({
-  strict: true,
+export default new Vuex.Store({
   state: {
     exchanges: [...ccxt.exchanges],
     exchange: '',
@@ -13,7 +12,7 @@ export const store = new Vuex.Store({
     pair: ''
   },
   mutations: {
-    getExchange (state, payload) {
+    receiveExchange (state, payload) {
       state.exchange = payload
       console.log(state.exchange)
     },
@@ -27,11 +26,14 @@ export const store = new Vuex.Store({
     }
   },
   actions: {
-    async getMarkets (commit, state) {
+    async getMarkets ({commit, state}, exchange) {
       const proxy = 'https://cors-anywhere.herokuapp.com/'
-      let exchange = new ccxt[state.exchange]({ 'proxy': proxy })
-      let pairs = await exchange.loadMarkets()
+      let newExchange = new ccxt[state.exchange]({ 'proxy': proxy })
+      let pairs = await newExchange.loadMarkets()
       commit('getMarkets', pairs)
+    },
+    receiveExchange ({commit}, exchange) {
+      commit('receiveExchange', exchange)
     }
   }
 })

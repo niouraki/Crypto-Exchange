@@ -10,10 +10,6 @@
 import Exchange from './components/Exchange'
 import Pairs from './components/Pairs'
 import Trades from './components/Trades'
-import Vue from 'vue'
-import AsyncComputed from 'vue-async-computed'
-
-Vue.use(AsyncComputed)
 
 export default {
   name: 'App',
