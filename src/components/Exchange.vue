@@ -1,29 +1,37 @@
 <template>
   <div>
     <h1>Exchange Component</h1>
-    <select v-model="ExchangeStore" v-on:change="getExchange(ExchangeStore)">
+    <select :value="exchange" v-on:change="getExchange">
       <option disabled value="">Please select an exchange</option>
-      <option v-for="exchange in exchanges" :key="exchange.id">{{ exchange }}</option>
+      <option v-for="exchange in exchanges" v-bind:value="exchange" :key="exchange.id">{{ exchange }}</option>
     </select>
   </div>
 </template>
 
 <script>
-import ExchangeStore from "../stores/ExchangeStore"
+import { mapActions } from 'vuex'
+
 const ccxt = require('ccxt')
 
 export default {
   name: 'Exchange',
   data () {
-    return {
-      ExchangeStore: ExchangeStore.data.myExchange,
-      exchanges: [...ccxt.exchanges]
+  },
+  computed: {
+    exchanges () {
+      return this.$store.state.exchanges
+    },
+    exchange () {
+      return this.$store.state.exchange
     }
   },
   // when the select input value is changed by the user, this method will get the new value and store it
   methods: {
-    getExchange (exchange) {
-      ExchangeStore.methods.getExchange(exchange)
+    ...mapActions(['getMarkets', 'getExchange']),
+    getExchange (e) {
+      let exchange = e.target.value
+      this.$store.commit('getExchange', exchange)
+      this.getMarkets()
     }
   }
 }
