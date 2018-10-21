@@ -1,8 +1,9 @@
 <template>
   <div>
     <h1>Pairs Component</h1>
-    <select :value="pair" v-on:change="getPair">
-      <option v-for="pair in pairs" v-bind:value="pair" :key="pair.id"> {{ pair.symbol }}</option>
+    <select :value="pair.symbol" v-on:change="getPair">
+      <option disabled value="">Please select a pair</option>
+      <option v-for="pair in pairs" v-bind:value="pair.symbol" :key="pair.id"> {{ pair.symbol }}</option>
     </select>
   </div>
 </template>
@@ -12,10 +13,6 @@ import { mapActions } from 'vuex'
 
 export default {
   name: 'Pairs',
-  data () {
-    return {
-    }
-  },
   computed: {
     pairs () {
       return this.$store.state.pairs
@@ -26,10 +23,12 @@ export default {
   },
   // when the select input value is changed by the user, this method will get the new value and store it
   methods: {
-    ...mapActions(['getMarkets']),
+    // Gets the value of the pair in the input and passes it to the action receivePairs in the store
+    ...mapActions(['receivePair', 'getTrades']),
     getPair (e) {
       let pair = e.target.value
-      this.$store.commit('getPair', pair)
+      this.receivePair(pair)
+      this.getTrades()
     }
   }
 }
