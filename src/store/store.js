@@ -36,7 +36,7 @@ export default new Vuex.Store({
     async getMarkets ({commit, state}, exchange) {
       try {
         const proxy = 'https://cors-anywhere.herokuapp.com/'
-        let newExchange = new ccxt[state.exchange]({ 'proxy': proxy })
+        let newExchange = new ccxt[state.exchange]({ 'proxy': proxy, 'timeout': 20000 })
         let pairs = await newExchange.loadMarkets()
         commit('getMarkets', pairs)
       } catch (error) {
@@ -55,10 +55,11 @@ export default new Vuex.Store({
     async getTrades ({commit, state}) {
       try {
         const proxy = 'https://cors-anywhere.herokuapp.com/'
-        let newExchange = new ccxt[state.exchange]({ 'proxy': proxy })
+        let newExchange = new ccxt[state.exchange]({ 'proxy': proxy, 'timeout': 20000 })
+        let since = newExchange.seconds()
         const symbol = state.pair
         const limit = 20
-        const trades = await newExchange.fetchTrades(symbol, since - 24 * 60 * 60 * 1000, limit) //since one hour back
+        const trades = await newExchange.fetchTrades(symbol, since, limit)
         commit('receiveTrades', trades)
       } catch (error) {
         alert('There has been an error. Please try again later')

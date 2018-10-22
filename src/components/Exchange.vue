@@ -42,7 +42,7 @@ export default {
 h1 {
   margin-top: 100px;
   font-size: 40px;
-  color: #706f6f;
+  color: #36393b;
 }
 select {
   font-size: 18px;
