@@ -56,10 +56,9 @@ export default new Vuex.Store({
       try {
         const proxy = 'https://cors-anywhere.herokuapp.com/'
         let newExchange = new ccxt[state.exchange]({ 'proxy': proxy })
-        let since = newExchange.seconds() - 10
         const symbol = state.pair
         const limit = 20
-        const trades = await newExchange.fetchTrades(symbol, since, limit)
+        const trades = await newExchange.fetchTrades(symbol, since - 24 * 60 * 60 * 1000, limit) //since one hour back
         commit('receiveTrades', trades)
       } catch (error) {
         alert('There has been an error. Please try again later')
