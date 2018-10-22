@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <h1>Exchange Component</h1>
+  <div class="exchange-component">
+    <h1>Exchange</h1>
     <select :value="exchange" v-on:change="getExchange">
       <option disabled value="">Please select an exchange</option>
       <option v-for="exchange in exchanges" v-bind:value="exchange" :key="exchange.id">{{ exchange }}</option>
@@ -35,4 +35,17 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.exchange-component {
+  background-color: #fde2ff;
+  height: 100%;
+}
+h1 {
+  margin-top: 100px;
+  font-size: 40px;
+  color: #706f6f;
+}
+select {
+  font-size: 18px;
+  padding: 5px;
+}
 </style>

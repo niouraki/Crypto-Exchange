@@ -34,10 +34,15 @@ export default new Vuex.Store({
   actions: {
     // async function that instantiates the exchange and retrieves the pairs. It sends the pairs to the getMarkets mutation
     async getMarkets ({commit, state}, exchange) {
-      const proxy = 'https://cors-anywhere.herokuapp.com/'
-      let newExchange = new ccxt[state.exchange]({ 'proxy': proxy })
-      let pairs = await newExchange.loadMarkets()
-      commit('getMarkets', pairs)
+      try {
+        const proxy = 'https://cors-anywhere.herokuapp.com/'
+        let newExchange = new ccxt[state.exchange]({ 'proxy': proxy })
+        let pairs = await newExchange.loadMarkets()
+        commit('getMarkets', pairs)
+      } catch (error) {
+        alert('There has been an error. Please try again later')
+        console.log(error)
+      }
     },
     // Receives the exchange from the exchange component and passes it with commit to the receiveExchange mutation
     receiveExchange ({commit}, exchange) {
@@ -48,13 +53,18 @@ export default new Vuex.Store({
       commit('receivePair', pair)
     },
     async getTrades ({commit, state}) {
-      const proxy = 'https://cors-anywhere.herokuapp.com/'
-      let newExchange = new ccxt[state.exchange]({ 'proxy': proxy })
-      let since = undefined
-      const symbol = state.pair
-      const limit = 30
-      const trades = await newExchange.fetchTrades(symbol, since, limit)
-      commit('receiveTrades', trades)
+      try {
+        const proxy = 'https://cors-anywhere.herokuapp.com/'
+        let newExchange = new ccxt[state.exchange]({ 'proxy': proxy })
+        let since = newExchange.seconds() - 10
+        const symbol = state.pair
+        const limit = 20
+        const trades = await newExchange.fetchTrades(symbol, since, limit)
+        commit('receiveTrades', trades)
+      } catch (error) {
+        alert('There has been an error. Please try again later')
+        console.log(error)
+      }
     }
   }
 })
